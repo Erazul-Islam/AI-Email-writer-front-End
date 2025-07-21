@@ -6,8 +6,7 @@ const GeminiEmailGenerator = () => {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
-
-  console.log("message",message)
+  console.log(process.env.NEXT_PUBLIC_EMAIL_API)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,10 +14,9 @@ const GeminiEmailGenerator = () => {
     setResponse("");
 
     try {
-      const res = await axios.post("https://letter-navy-eight.vercel.app/api/v1/email", {
+      const res = await axios.post(process.env.NEXT_PUBLIC_EMAIL_API, {
         message,
       });
-      console.log("response",res)
       setResponse(res.data.data);
     } catch (err) {
       console.error("Error:", err);
